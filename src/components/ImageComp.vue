@@ -12,7 +12,7 @@
         <div class="area-second">{{image.user.location}}</div>
       </div>
     </div>
-    <Modal :item="modalItems" v-show="isModalVisible" @close="closeModal" />
+    <Modal :item="modalItems" v-if="isModalVisible" @close="closeModal" />
   </div>
 </template>
 

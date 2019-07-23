@@ -15,7 +15,18 @@
               @click="close"
               aria-label="Close modal"
             >x</button>
-            <img :src="item.urls.full" alt class="image-fluid" />
+            <div>
+              <img
+                :src="item.urls.full"
+                alt
+                class="image-fluid"
+                id="modal-image"
+                @load="imageLoad = true"
+              />
+            </div>
+            <div v-if="!imageLoad" class="full">
+              <img src="@/assets/gif.svg" alt />
+            </div>
           </slot>
         </header>
         <footer class="modal-footer">
@@ -34,6 +45,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      imageLoad: false
+    };
+  },
   name: "modal",
   props: {
     item: Object
@@ -41,6 +57,9 @@ export default {
   methods: {
     close() {
       this.$emit("close");
+    },
+    load() {
+      console.log("we are here");
     }
   }
 };
@@ -129,5 +148,17 @@ export default {
   padding-top: 4px;
   color: grey;
   font-weight: 500;
+}
+.full {
+  width: 65%;
+  height: 65vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-bottom: 1px solid #f5f5f5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 </style>
